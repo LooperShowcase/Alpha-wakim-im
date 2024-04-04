@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1fa433;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      .username {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      body{
+       background-color: #AEC3B0; 
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Welcome to the New Page</h2>
+      <p>
+        Your username is:
+        <span class="username">
+          <script>
+            var urlParams = new URLSearchParams(window.location.search);
+            var username = urlParams.get("username");
+            document.write(username);
+          </script>
+        </span>
+      </p>
+      <p>Thank you for logging in!</p>
+      <p><a href="index.html">Go back to Home</a></p>
+    </div>
+  </body>
+</html>

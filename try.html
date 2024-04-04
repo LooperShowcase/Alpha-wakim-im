@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic-Tac-Toe</title>
+<style>
+  /* Styling for the Tic-Tac-Toe grid */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 2px;
+    background-color: #444;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .cell {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+    background-color: #888;
+    color: #fff;
+  }
+  .cell:hover {
+    background-color: #999;
+  }
+</style>
+</head>
+<body>
+<div class="board" id="board">
+  <div class="cell" onclick="place('0,0')" id="cell00"></div>
+  <div class="cell" onclick="place('0,1')" id="cell01"></div>
+  <div class="cell" onclick="place('0,2')" id="cell02"></div>
+  <div class="cell" onclick="place('1,0')" id="cell10"></div>
+  <div class="cell" onclick="place('1,1')" id="cell11"></div>
+  <div class="cell" onclick="place('1,2')" id="cell12"></div>
+  <div class="cell" onclick="place('2,0')" id="cell20"></div>
+  <div class="cell" onclick="place('2,1')" id="cell21"></div>
+  <div class="cell" onclick="place('2,2')" id="cell22"></div>
+</div>
+
+<script>
+  // JavaScript code to handle the game logic
+  let currentPlayer = '🍔';
+  let gameBoard = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
+
+  function place(position) {
+    const [row, col] = position.split(',');
+    if (gameBoard[row][col] === '') {
+      document.getElementById(`cell${row}${col}`).innerText = currentPlayer;
+      gameBoard[row][col] = currentPlayer;
+      checkWinner();
+      currentPlayer = currentPlayer === '🍔' ? '🥩' : '🍔';
+    }
+  }
+
+  function checkWinner() {
+    const lines = [
+      [[0, 0], [0, 1], [0, 2]],
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      [[0, 0], [1, 1], [2, 2]],
+      [[0, 2], [1, 1], [2, 0]],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (
+        gameBoard[a[0]][a[1]] &&
+        gameBoard[a[0]][a[1]] === gameBoard[b[0]][b[1]] &&
+        gameBoard[a[0]][a[1]] === gameBoard[c[0]][c[1]]
+      ) {
+        alert(`${gameBoard[a[0]][a[1]]} wins!`);
+        resetBoard();
+        break;
+      }
+    }
+  }
+
+  function resetBoard() {
+    currentPlayer = '🍔';
+    gameBoard = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ];
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        document.getElementById(`cell${i}${j}`).innerText = '';
+      }
+    }
+  }
+</script>
+</body>
+</html>
